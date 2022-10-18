@@ -3,25 +3,14 @@ import { Car } from './interfaces/car.interface';
 import { v4 as uuid } from 'uuid';
 import { CreateCarDto, UpdateCarDto } from './dto';
 
-
 @Injectable()
 export class CarsService {
   private cars: Car[] = [
-    {
-      id: uuid(),
-      brand: 'Toyota',
-      model: 'Corolla',
-    },
-    {
-      id: uuid(),
-      brand: 'Honda',
-      model: 'Civic',
-    },
-    {
-      id: uuid(),
-      brand: 'Ford',
-      model: 'Fiesta',
-    },
+    // {
+    //   id: uuid(),
+    //   brand: 'Toyota',
+    //   model: 'Corolla',
+    // },
   ];
 
   findAll() {
@@ -53,7 +42,6 @@ export class CarsService {
         carDB = {
           ...carDB,
           ...updateCarDto,
-          id,
         };
         return carDB;
       }
@@ -64,10 +52,10 @@ export class CarsService {
 
   deleteCar(id: string) {
     const carDB = this.findOneById(id);
-
     this.cars = this.cars.filter((car) => car.id !== id);
-    return {
-      message: `Car with id ${id} deleted`,
-    };
+  }
+
+  fillCarsWithSeedData(cars: Car[]) {
+    this.cars = cars;
   }
 }
